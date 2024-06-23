@@ -1,5 +1,7 @@
 package com.mangazo.ecommerce;
 
+import com.mangazo.ecommerce.entity.Address;
+import com.mangazo.ecommerce.entity.OrderItem;
 import com.mangazo.ecommerce.entity.Product;
 import com.mangazo.ecommerce.entity.ProductCategory;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +27,18 @@ public class EcommerceApplication {
 	@Scope(value = "prototype")
 	ProductCategory getProductCategory() {
 		return new ProductCategory();
+	}
+
+	@Bean
+	@Scope(value = "prototype")
+	Address getAddress() {
+		return new Address();
+	}
+
+	@Bean
+	@Scope(value = "prototype")
+	OrderItem getOrderItem() {
+		return new OrderItem();
 	}
 
 }

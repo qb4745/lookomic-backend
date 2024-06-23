@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > ProductCategoryRepository</title>
+  <title>Coverage Report > RegionRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,14 +22,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.mangazo.ecommerce.dao</a>
 </div>
 
-<h1>Coverage Summary for Class: ProductCategoryRepository (com.mangazo.ecommerce.dao)</h1>
+<h1>Coverage Summary for Class: RegionRepository (com.mangazo.ecommerce.dao)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">ProductCategoryRepository</td>
+  <td class="name">RegionRepository</td>
 </tr>
 
 </table>
@@ -41,13 +41,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.mangazo.ecommerce.dao;
 &nbsp;
-&nbsp;import com.mangazo.ecommerce.entity.ProductCategory;
+&nbsp;
+&nbsp;import com.mangazo.ecommerce.entity.Region;
 &nbsp;import org.springframework.data.jpa.repository.JpaRepository;
 &nbsp;import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 &nbsp;
-&nbsp;@RepositoryRestResource(collectionResourceRel = &quot;productCategory&quot;, path = &quot;product-category&quot;)
-&nbsp;public interface ProductCategoryRepository extends JpaRepository&lt;ProductCategory, Long&gt; {
-&nbsp;    ProductCategory findByCategoryName(String name);
+&nbsp;@RepositoryRestResource(collectionResourceRel = &quot;regiones&quot;, path=&quot;regiones&quot;)
+&nbsp;public interface RegionRepository extends JpaRepository&lt;Region, Integer&gt; {
+&nbsp;
+&nbsp;    
 &nbsp;}
 </code>
 </pre>
@@ -72,7 +74,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-06-23 04:13</div>
+    <div style="float:right;">generated on 2024-06-23 11:11</div>
 </div>
 </body>
 </html>

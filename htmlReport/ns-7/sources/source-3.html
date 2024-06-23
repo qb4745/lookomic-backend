@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > OrderRepository</title>
+  <title>Coverage Report > CustomerRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,16 +22,25 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.mangazo.ecommerce.dao</a>
 </div>
 
-<h1>Coverage Summary for Class: OrderRepository (com.mangazo.ecommerce.dao)</h1>
+<h1>Coverage Summary for Class: CustomerRepository (com.mangazo.ecommerce.dao)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
 </tr>
+  <tr>
+    <td class="name">CustomerRepository$MockitoMock$R9CgZjao</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerRepository$MockitoMock$R9CgZjao$auxiliary$Cy2HDyKO</td>
+  </tr>
+  <tr>
+    <td class="name">CustomerRepository$MockitoMock$R9CgZjao$auxiliary$PC7J0Do4</td>
+  </tr>
 <tr>
-  <td class="name">OrderRepository</td>
+  <td class="name"><strong>Total</strong></td>
 </tr>
-
 </table>
 
 <br/>
@@ -41,17 +50,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.mangazo.ecommerce.dao;
 &nbsp;
-&nbsp;import com.mangazo.ecommerce.entity.Order;
-&nbsp;import org.springframework.data.domain.Page;
-&nbsp;import org.springframework.data.domain.Pageable;
+&nbsp;import com.mangazo.ecommerce.entity.Customer;
 &nbsp;import org.springframework.data.jpa.repository.JpaRepository;
-&nbsp;import org.springframework.data.repository.query.Param;
-&nbsp;import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 &nbsp;
-&nbsp;@RepositoryRestResource
-&nbsp;public interface OrderRepository extends JpaRepository&lt;Order, Long&gt; {
+&nbsp;import java.util.Optional;
 &nbsp;
-&nbsp;    Page&lt;Order&gt; findByCustomerEmailOrderByDateCreatedDesc(@Param(&quot;email&quot;) String email, Pageable pageable);
+&nbsp;public interface CustomerRepository extends JpaRepository&lt;Customer, Long&gt; {
+&nbsp;
+&nbsp;    Optional&lt;Customer&gt; findByEmail(String email);
 &nbsp;}
 </code>
 </pre>
@@ -76,7 +82,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-06-23 04:13</div>
+    <div style="float:right;">generated on 2024-06-23 11:11</div>
 </div>
 </body>
 </html>
