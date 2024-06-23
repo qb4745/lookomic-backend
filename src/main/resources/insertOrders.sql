@@ -12,9 +12,7 @@ insert into orders(id, order_tracking_number, total_price, total_quantity, billi
 values (1, 'tracking123', 100, 5, 1, 10, 3, 'processing', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
        (2, 'tracking456', 200, 6, 2, 10, 4, 'shipped', '2022-01-02 00:00:00', '2022-01-02 00:00:00');
 
-/*insert into orders(id, order_tracking_number, total_price, total_quantity, status, date_created, last_updated, customer_id, shipping_address_id, billing_address_id)
-values (1, 'tracking123', 100, 2, 'processing', '2022-01-01 00:00:00', '2022-01-01 00:00:00', 2, 1, 1),
-       (2, 'tracking456', 200, 3, 'shipped', '2022-01-02 00:00:00', '2022-01-02 00:00:00', 2, 2, 2);*/
+
 
 
 

@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### htmlReports ###
-htmlReports/
+/htmlReport/
