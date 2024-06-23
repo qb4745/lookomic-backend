@@ -45,26 +45,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">CheckoutServiceImpl</td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (1/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    12%
+    96%
   </span>
   <span class="absValue">
-    (3/25)
+    (24/25)
   </span>
 </td>
 </tr>
@@ -75,26 +75,26 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (1/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    12%
+    96%
   </span>
   <span class="absValue">
-    (3/25)
+    (24/25)
   </span>
 </td>
 </tr>
@@ -127,7 +127,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;@Service
 &nbsp;public class CheckoutServiceImpl implements CheckoutService {
 &nbsp;
-&nbsp;    private final CustomerRepository customerRepository;
+&nbsp;    private CustomerRepository customerRepository;
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    public CheckoutServiceImpl(CustomerRepository customerRepository,
@@ -143,62 +143,64 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public PurchaseResponse placeOrder(Purchase purchase) {
 &nbsp;
 &nbsp;        // traer la info de la order desde el dto.
-<b class="nc">&nbsp;        Order order = purchase.getOrder();</b>
+<b class="fc">&nbsp;        Order order = purchase.getOrder();</b>
 &nbsp;
 &nbsp;        // generar numero de pedido.
-<b class="nc">&nbsp;        String orderTrackingNumber = generateOrderTrackingNumber();</b>
-<b class="nc">&nbsp;        order.setOrderTrackingNumber(orderTrackingNumber);</b>
+<b class="fc">&nbsp;        String orderTrackingNumber = generateOrderTrackingNumber();</b>
+<b class="fc">&nbsp;        order.setOrderTrackingNumber(orderTrackingNumber);</b>
 &nbsp;
 &nbsp;        // popular la order con los orderItems
-<b class="nc">&nbsp;        Set&lt;OrderItem&gt; orderItems = purchase.getOrderItems();</b>
-<b class="nc">&nbsp;        orderItems.forEach(order::add);</b>
+<b class="fc">&nbsp;        Set&lt;OrderItem&gt; orderItems = purchase.getOrderItems();</b>
+<b class="fc">&nbsp;        orderItems.forEach(order::add);</b>
 &nbsp;
 &nbsp;        // popular order con ambas Address
-<b class="nc">&nbsp;        order.setShippingAddress(purchase.getShippingAddress());</b>
-<b class="nc">&nbsp;        order.setBillingAddress(purchase.getBillingAddress());</b>
+<b class="fc">&nbsp;        order.setShippingAddress(purchase.getShippingAddress());</b>
+<b class="fc">&nbsp;        order.setBillingAddress(purchase.getBillingAddress());</b>
 &nbsp;
 &nbsp;        // popular customer con order
-<b class="nc">&nbsp;        Customer customer = purchase.getCustomer();</b>
+<b class="fc">&nbsp;        Customer customer = purchase.getCustomer();</b>
 &nbsp;
-<b class="nc">&nbsp;        String email = customer.getEmail();</b>
+<b class="fc">&nbsp;        String email = customer.getEmail();</b>
 &nbsp;
-<b class="nc">&nbsp;        Customer customerExistInDB = customerRepository.findByEmail(email);</b>
+&nbsp;        //Customer customerExistInDB = customerRepository.findByEmail(email);
+<b class="fc">&nbsp;        Optional&lt;Customer&gt; customerExistInDB = customerRepository.findByEmail(email);</b>
 &nbsp;
-<b class="nc">&nbsp;        if (customerExistInDB != null) {</b>
-<b class="nc">&nbsp;            customer = customerExistInDB;</b>
+&nbsp;/*        if (customerExistInDB != null) {
+&nbsp;            customer = customerExistInDB.get();
+&nbsp;        }*/
+<b class="pc">&nbsp;        if(customerExistInDB.isPresent()) {</b>
+<b class="nc">&nbsp;            customer = customerExistInDB.get();</b>
 &nbsp;        }
 &nbsp;
-&nbsp;/*        Customer customer = Optional.ofNullable(customerRepository.
-&nbsp;                                findByEmail(purchase.getCustomer().getEmail()))
-&nbsp;                                .orElse(purchase.getCustomer());*/
 &nbsp;
-<b class="nc">&nbsp;        customer.add(order);</b>
+<b class="fc">&nbsp;        customer.add(order);</b>
 &nbsp;
 &nbsp;        // guardar en db
-<b class="nc">&nbsp;        customerRepository.save(customer);</b>
+<b class="fc">&nbsp;        customerRepository.save(customer);</b>
 &nbsp;
 &nbsp;        // regresar una respuesta
-<b class="nc">&nbsp;        return new PurchaseResponse(orderTrackingNumber);</b>
+<b class="fc">&nbsp;        return new PurchaseResponse(orderTrackingNumber);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
-<b class="nc">&nbsp;        List&lt;String&gt; paymentMethodTypes = Collections.singletonList(&quot;card&quot;);</b>
+<b class="fc">&nbsp;        List&lt;String&gt; paymentMethodTypes = Collections.singletonList(&quot;card&quot;);</b>
 &nbsp;
-<b class="nc">&nbsp;        Map&lt;String, Object&gt; params = Map.of(</b>
-<b class="nc">&nbsp;                &quot;amount&quot;, paymentInfo.getAmount(),</b>
-<b class="nc">&nbsp;                &quot;currency&quot;, paymentInfo.getCurrency(),</b>
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; params = Map.of(</b>
+<b class="fc">&nbsp;                &quot;amount&quot;, paymentInfo.getAmount(),</b>
+<b class="fc">&nbsp;                &quot;currency&quot;, paymentInfo.getCurrency(),</b>
 &nbsp;                &quot;payment_method_types&quot;, paymentMethodTypes,
 &nbsp;                &quot;description&quot;, &quot;Lookomic.cl&quot;,
-<b class="nc">&nbsp;                &quot;receipt_email&quot;, paymentInfo.getReceiptEmail()</b>
+<b class="fc">&nbsp;                &quot;receipt_email&quot;, paymentInfo.getReceiptEmail()</b>
 &nbsp;        );
 &nbsp;
-<b class="nc">&nbsp;        return PaymentIntent.create(params);</b>
+<b class="fc">&nbsp;        return PaymentIntent.create(params);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private String generateOrderTrackingNumber() {
-<b class="nc">&nbsp;        return UUID.randomUUID().toString();</b>
+<b class="fc">&nbsp;        return UUID.randomUUID().toString();</b>
 &nbsp;    }
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -223,7 +225,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-06-23 04:13</div>
+    <div style="float:right;">generated on 2024-06-23 11:11</div>
 </div>
 </body>
 </html>

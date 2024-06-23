@@ -434,9 +434,11 @@ public class EntityDaoTest {
     @Sql({"/insertOrders.sql"})
     @WithMockUser(username = "jai.vicencio@duocuc.cl", roles = "USER")
     void testCustomerRepositoryFindByEmail() throws Exception {
-        Customer customer = customerRepository.findByEmail("yannina.zanetta@duocuc.cl");
+        //Customer customer = customerRepository.findByEmail("yannina.zanetta@duocuc.cl");
+        Optional<Customer> customer = customerRepository.findByEmail("yannina.zanetta@duocuc.cl");;
+        assertTrue(customer.isPresent());
         assertNotNull(customer, "One Customer with email yannina.zanetta@duocuc.cl on test DB");
-        assertEquals("Yannina", customer.getFirstName());
+        assertEquals("Yannina", customer.get().getFirstName());
     }
 
 

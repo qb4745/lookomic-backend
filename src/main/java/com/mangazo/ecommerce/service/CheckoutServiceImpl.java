@@ -20,7 +20,7 @@ import java.util.*;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private final CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     public CheckoutServiceImpl(CustomerRepository customerRepository,
@@ -55,15 +55,16 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         String email = customer.getEmail();
 
-        Customer customerExistInDB = customerRepository.findByEmail(email);
+        //Customer customerExistInDB = customerRepository.findByEmail(email);
+        Optional<Customer> customerExistInDB = customerRepository.findByEmail(email);
 
-        if (customerExistInDB != null) {
-            customer = customerExistInDB;
+/*        if (customerExistInDB != null) {
+            customer = customerExistInDB.get();
+        }*/
+        if(customerExistInDB.isPresent()) {
+            customer = customerExistInDB.get();
         }
 
-/*        Customer customer = Optional.ofNullable(customerRepository.
-                                findByEmail(purchase.getCustomer().getEmail()))
-                                .orElse(purchase.getCustomer());*/
 
         customer.add(order);
 
@@ -89,7 +90,8 @@ public class CheckoutServiceImpl implements CheckoutService {
         return PaymentIntent.create(params);
     }
 
-    private String generateOrderTrackingNumber() {
-        return UUID.randomUUID().toString();
-    }
+        private String generateOrderTrackingNumber() {
+            return UUID.randomUUID().toString();
+        }
+
 }
