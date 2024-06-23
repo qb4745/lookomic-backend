@@ -11,6 +11,7 @@ import com.stripe.exception.ApiException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.test.context.TestPropertySource;
@@ -37,6 +38,7 @@ public class CheckoutServiceImplTest {
     }
 
     @Test
+    @DisplayName("CheckoutServiceImplTest: Test placeOrder successfully saves customer")
     void  testPlaceOrderSuccessfullySavesCustomer() {
         Purchase purchase = new Purchase();
         Order order = new Order();
@@ -65,6 +67,7 @@ public class CheckoutServiceImplTest {
     }
 
     @Test
+    @DisplayName("CheckoutServiceImplTest: Test should create payment intent with correct id")
     void testShouldCreatePaymentIntentWithCorrectId() throws StripeException {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount(1000);
@@ -92,6 +95,7 @@ public class CheckoutServiceImplTest {
     }
 
     @Test
+    @DisplayName("CheckoutServiceImplTest: Should throw StripeException when payment intent creation fails")
     void testShouldThrowStripeExceptionWhenPaymentIntentCreationFails() throws StripeException {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount(1000);
