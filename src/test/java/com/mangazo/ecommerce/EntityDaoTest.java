@@ -73,9 +73,6 @@ public class EntityDaoTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Value("${sql.script.create.product.category}")
     private String sqlAddProductCategory;
 
