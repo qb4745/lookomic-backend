@@ -44,7 +44,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(Region.class, config, theUnsupportedActions);
 
         // disable HTTP methods for Comuna: PUT, POST and DELETE
-        disableHttpMethods(Comuna.class, config, theUnsupportedActions);    
+        disableHttpMethods(Comuna.class, config, theUnsupportedActions);
 
         // disable HTTP methods for Order: PUT, POST and DELETE
         disableHttpMethods(Order.class, config, theUnsupportedActions);
