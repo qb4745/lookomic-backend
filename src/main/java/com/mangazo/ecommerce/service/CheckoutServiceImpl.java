@@ -58,9 +58,6 @@ public class CheckoutServiceImpl implements CheckoutService {
         //Customer customerExistInDB = customerRepository.findByEmail(email);
         Optional<Customer> customerExistInDB = customerRepository.findByEmail(email);
 
-/*        if (customerExistInDB != null) {
-            customer = customerExistInDB.get();
-        }*/
         if(customerExistInDB.isPresent()) {
             customer = customerExistInDB.get();
         }

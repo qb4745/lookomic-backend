@@ -165,9 +165,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;        //Customer customerExistInDB = customerRepository.findByEmail(email);
 <b class="fc">&nbsp;        Optional&lt;Customer&gt; customerExistInDB = customerRepository.findByEmail(email);</b>
 &nbsp;
-&nbsp;/*        if (customerExistInDB != null) {
-&nbsp;            customer = customerExistInDB.get();
-&nbsp;        }*/
 <b class="pc">&nbsp;        if(customerExistInDB.isPresent()) {</b>
 <b class="nc">&nbsp;            customer = customerExistInDB.get();</b>
 &nbsp;        }
@@ -197,9 +194,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return PaymentIntent.create(params);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    private String generateOrderTrackingNumber() {
-<b class="fc">&nbsp;        return UUID.randomUUID().toString();</b>
-&nbsp;    }
+&nbsp;        private String generateOrderTrackingNumber() {
+<b class="fc">&nbsp;            return UUID.randomUUID().toString();</b>
+&nbsp;        }
 &nbsp;
 &nbsp;}
 </code>
@@ -225,7 +222,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-06-23 11:11</div>
+    <div style="float:right;">generated on 2024-06-23 12:40</div>
 </div>
 </body>
 </html>
