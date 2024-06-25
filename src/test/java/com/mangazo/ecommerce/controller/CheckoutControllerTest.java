@@ -128,4 +128,29 @@ public class CheckoutControllerTest {
                 .andExpect(content().json("{}"));
     }
 
+    @Test
+    @WithMockUser(username = "jai.vicencio@duocuc.cl", roles = "USER")
+    @DisplayName("Should return payment intent when create payment intent is called")
+    public void shouldReturnUnautorizedWhenCreatePaymentIntentIsCalledWithoutAuth() throws Exception {
+        // Arrange
+        PaymentInfo mockPaymentInfo = new PaymentInfo();
+        mockPaymentInfo.setAmount(1000);
+        mockPaymentInfo.setCurrency("clp");
+        mockPaymentInfo.setReceiptEmail("test@example.com");
+
+        // Mock the PaymentIntent and its toJson method
+        PaymentIntent mockPaymentIntent = Mockito.mock(PaymentIntent.class);
+        when(mockPaymentIntent.toJson()).thenReturn("{}");
+
+        // Mock the behavior of mockCheckoutService.createPaymentIntent() method
+        doReturn(mockPaymentIntent).when(mockCheckoutServiceNoImpl).createPaymentIntent(mockPaymentInfo);
+
+        // Act and Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/checkout/payment-intent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(mockPaymentInfo)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{}"));
+    }
+
 }

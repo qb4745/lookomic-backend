@@ -1,10 +1,14 @@
 package com.mangazo.ecommerce.controller;
 
+import com.mangazo.ecommerce.dao.CustomerRepository;
 import com.mangazo.ecommerce.dto.PaymentInfo;
 import com.mangazo.ecommerce.dto.Purchase;
 import com.mangazo.ecommerce.dto.PurchaseResponse;
 import com.mangazo.ecommerce.service.CheckoutService;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ public class CheckoutController {
     public CheckoutController(CheckoutService checkoutService) {
         this.checkoutService = checkoutService;
     }
+
 
     @PostMapping("/purchase")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {

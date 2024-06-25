@@ -22,14 +22,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -334,6 +332,19 @@ public class EntityDaoTest {
     }
 
     @Test
+    @Order(20)
+    @DisplayName("OrderRepository: Find By Customer Email Order By Date Created Desc Unauthorized Access")
+    @Sql({"/insertOrders.sql"})
+    void testUnauthorizedAccessToOrderByEmailWithoutCredentials () throws Exception {
+        mockMvc.perform(get("/api/orders/search/findByCustomerEmailOrderByDateCreatedDesc")
+                        .param("email", "jai.vicencio@duocuc.cl")
+                        .param("page", "0")
+                        .param("size", "20")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect((status().isUnauthorized()));
+    }
+
+    @Test
     @Order(21)
     @DisplayName("OrderRepository: Get All")
     @Sql({"/insertOrders.sql"})
@@ -345,6 +356,18 @@ public class EntityDaoTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$._embedded.orders", hasSize(2)));
+    }
+
+    @Test
+    @Order(21)
+    @DisplayName("OrderRepository: Get All Unauthorized Access")
+    @Sql({"/insertOrders.sql"})
+    void testOrderRepositoryGetAllFailDueToNotBeingAuthenticated() throws Exception {
+        mockMvc.perform(get("/api/orders")
+                        .param("page", "0")
+                        .param("size", "20")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect((status().isUnauthorized()));
     }
 
     @Test
